@@ -127,7 +127,7 @@
 
 @media (max-width: 768px) {
   .navbar {
-    padding: 1rem 6vw;
+    padding: 1rem 20px;
   }
 
   .menu-toggle {
@@ -142,7 +142,8 @@
     flex-direction: column;
     align-items: flex-start;
     gap: 1.75rem;
-    width: min(280px, 75vw);
+      width: 260px;        /* ✅ FIXED WIDTH */
+  max-width: 80vw; 
     height: 100vh;
     margin: 0;
     padding: 6.5rem 2rem 2rem;
@@ -208,4 +209,16 @@
   .menu-toggle {
     transition: none;
   }
+}
+
+.overlay {
+  position: fixed;
+  inset: 0;
+  background: rgba(0,0,0,0.5);
+  z-index: 98;
+}
+
+.menu-toggle.active {
+  transform: rotate(90deg);
+  color: var(--amber);
 }

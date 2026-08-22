@@ -13,3 +13,5 @@
   {{ isMenuOpen ? '✖' : '☰' }}
 </button>
 </nav>
+
+<div class="overlay" *ngIf="isMenuOpen" (click)="closeMenu()"></div>
