@@ -1,0 +1,226 @@
+/* ============================================
+   Experience Section — shares site token system
+   Vertical timeline: order = recency, so the
+   line + dot markers are earning their keep here.
+   ============================================ */
+
+.experience {
+  --ink: #0b1120;
+  --ink-soft: #121a2e;
+  --text: #e8ecf1;
+  --text-dim: #9aa4b8;
+  --amber: #ffb454;
+  --teal: #5eead4;
+  --border: rgba(232, 236, 241, 0.1);
+
+  position: relative;
+  padding: 7rem 8vw;
+  background: var(--ink);
+  font-family: "Inter", system-ui, sans-serif;
+  color: var(--text);
+}
+
+.experience h2 {
+  position: relative;
+  max-width: 780px;
+  margin: 0 auto 4rem;
+  padding-bottom: 0.75rem;
+  font-family: "Space Grotesk", "Inter", sans-serif;
+  font-weight: 600;
+  font-size: clamp(1.75rem, 3vw, 2.25rem);
+  letter-spacing: -0.02em;
+  text-align: center;
+}
+
+.experience h2::after {
+  content: "";
+  position: absolute;
+  left: 50%;
+  bottom: 0;
+  width: 48px;
+  height: 3px;
+  border-radius: 2px;
+  transform: translateX(-50%);
+  background: linear-gradient(90deg, var(--amber), var(--teal));
+}
+
+/* ============================================
+   Timeline spine
+   ============================================ */
+
+.timeline {
+  position: relative;
+  max-width: 780px;
+  margin: 0 auto;
+}
+
+.timeline::before {
+  content: "";
+  position: absolute;
+  top: 6px;
+  left: 7px;
+  width: 2px;
+  height: 100%;
+  background: linear-gradient(180deg, var(--amber), var(--teal), var(--border));
+  opacity: 0.5;
+}
+
+/* ============================================
+   Items
+   ============================================ */
+
+.timeline-item {
+  position: relative;
+  padding: 0 0 3rem 2.75rem;
+  opacity: 0;
+  transform: translateY(20px);
+  animation: rise 0.6s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+}
+
+.timeline-item:nth-child(1) { animation-delay: 0.05s; }
+.timeline-item:nth-child(2) { animation-delay: 0.15s; }
+.timeline-item:nth-child(3) { animation-delay: 0.25s; }
+.timeline-item:nth-child(4) { animation-delay: 0.35s; }
+
+.timeline-item:last-child {
+  padding-bottom: 0;
+}
+
+@keyframes rise {
+  to { opacity: 1; transform: translateY(0); }
+}
+
+/* dot marker on the spine */
+.timeline-item::before {
+  content: "";
+  position: absolute;
+  top: 4px;
+  left: 0;
+  width: 16px;
+  height: 16px;
+  border-radius: 50%;
+  background: var(--ink);
+  border: 2px solid var(--amber);
+  box-shadow: 0 0 0 4px var(--ink);
+  transition: border-color 0.3s ease, background 0.3s ease, transform 0.3s ease;
+}
+
+.timeline-item:hover::before {
+  background: var(--amber);
+  transform: scale(1.15);
+}
+
+.timeline-item h3 {
+  margin: 0 0 0.25rem;
+  font-family: "Space Grotesk", "Inter", sans-serif;
+  font-weight: 600;
+  font-size: 1.2rem;
+  color: var(--text);
+}
+
+.timeline-item h4 {
+  margin: 0 0 0.5rem;
+  font-weight: 500;
+  font-size: 1rem;
+  color: var(--teal);
+}
+
+.timeline-item span {
+  display: inline-block;
+  margin-bottom: 1rem;
+  padding: 0.3rem 0.7rem;
+  border: 1px solid var(--border);
+  border-radius: 6px;
+  background: var(--ink-soft);
+  font-family: "JetBrains Mono", monospace;
+  font-size: 0.78rem;
+  color: var(--text-dim);
+}
+
+.timeline-item ul {
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+
+.timeline-item li {
+  position: relative;
+  padding-left: 1.25rem;
+  margin-bottom: 0.6rem;
+  font-size: 0.95rem;
+  line-height: 1.6;
+  color: var(--text-dim);
+}
+
+.timeline-item li:last-child {
+  margin-bottom: 0;
+}
+
+.timeline-item li::before {
+  content: "";
+  position: absolute;
+  left: 0;
+  top: 0.6em;
+  width: 6px;
+  height: 6px;
+  border-radius: 1px;
+  background: var(--amber);
+  transform: translateY(-50%) rotate(45deg);
+}
+
+/* ============================================
+   Responsive
+   ============================================ */
+
+@media (max-width: 768px) {
+  .experience {
+    padding: 6rem 6vw;
+  }
+
+  .experience h2 {
+    margin-bottom: 3rem;
+  }
+
+  .timeline-item {
+    padding-left: 2.25rem;
+    padding-bottom: 2.25rem;
+  }
+}
+
+@media (max-width: 480px) {
+  .experience {
+    padding: 4.5rem 5vw;
+  }
+
+  .timeline::before {
+    left: 5px;
+  }
+
+  .timeline-item {
+    padding-left: 1.85rem;
+  }
+
+  .timeline-item h3 {
+    font-size: 1.05rem;
+  }
+
+  .timeline-item li {
+    font-size: 0.9rem;
+  }
+}
+
+/* ============================================
+   Reduced motion
+   ============================================ */
+
+@media (prefers-reduced-motion: reduce) {
+  .timeline-item {
+    animation: none;
+    opacity: 1;
+    transform: none;
+  }
+
+  .timeline-item:hover::before {
+    transform: none;
+  }
+}

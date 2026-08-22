@@ -1,0 +1,15 @@
+<nav class="navbar">
+  <div class="logo">Harish</div>
+
+  <ul class="menu" [class.active]="isMenuOpen">
+    <li><a href="#home" (click)="closeMenu()">Home</a></li>
+    <li><a href="#about" (click)="closeMenu()">About</a></li>
+    <li><a href="#projects" (click)="closeMenu()">Projects</a></li>
+    <li><a href="#skills" (click)="closeMenu()">skills</a></li>
+    <li><a href="#contact" (click)="closeMenu()">Contact</a></li>
+  </ul>
+
+  <button class="menu-toggle" (click)="toggleMenu()">
+  {{ isMenuOpen ? '✖' : '☰' }}
+</button>
+</nav>

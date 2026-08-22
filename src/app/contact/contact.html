@@ -1,0 +1,55 @@
+<section class="contact" id="contact">
+  <h2>Contact Me</h2>
+
+  <div class="contact-container">
+
+    <!-- Left Info -->
+    <div class="contact-info">
+      <h3>Let's Connect</h3>
+      <p>If you have any opportunity or project, feel free to reach out.</p>
+
+      <div class="info-item">
+        <strong>Email:</strong>
+        <a href="mailto:khan.abdulhaarish@gmail.com">khan.abdulhaarish@gmail.com</a>
+      </div>
+
+      <div class="info-item">
+        <strong>Location:</strong> Hyderabad, India
+      </div>
+
+      <div class="social-links">
+        <a href="https://github.com/haarish73" target="_blank">GitHub</a>
+        <a href="https://www.linkedin.com/in/abdul-harish-khan/" target="_blank">LinkedIn</a>
+      </div>
+    </div>
+
+    <!-- Right Form -->
+    <form class="contact-form" (ngSubmit)="submitForm(form)" #form="ngForm">
+
+      <input 
+        type="text" 
+        name="name" 
+        placeholder="Your Name" 
+        required 
+        ngModel />
+
+      <input 
+        type="email" 
+        name="email" 
+        placeholder="Your Email" 
+        required 
+        ngModel />
+
+      <textarea 
+        name="message" 
+        rows="5" 
+        placeholder="Your Message" 
+        required 
+        ngModel></textarea>
+
+      <button type="submit">Send Message</button>
+
+    </form>
+
+  </div>
+</section>

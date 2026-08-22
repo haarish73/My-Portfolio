@@ -1,0 +1,300 @@
+/* ============================================
+   Hero Section — tokens
+   Ink background, warm amber accent, teal glow.
+   Fonts: Space Grotesk (display), Inter (body),
+   JetBrains Mono (role / utility text)
+   ============================================ */
+
+.hero {
+  --ink: #0b1120;
+  --ink-soft: #121a2e;
+  --text: #e8ecf1;
+  --text-dim: #9aa4b8;
+  --amber: #ffb454;
+  --teal: #5eead4;
+  --border: rgba(232, 236, 241, 0.1);
+
+  position: relative;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 3rem;
+  min-height: 100vh;
+  padding: 6rem 8vw;
+  background:
+    radial-gradient(circle at 85% 15%, rgba(94, 234, 212, 0.08), transparent 45%),
+    radial-gradient(circle at 10% 90%, rgba(255, 180, 84, 0.07), transparent 40%),
+    var(--ink);
+  overflow: hidden;
+  font-family: "Inter", system-ui, sans-serif;
+  color: var(--text);
+}
+
+/* faint code-editor grid, purely atmospheric */
+.hero::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background-image:
+    linear-gradient(var(--border) 1px, transparent 1px),
+    linear-gradient(90deg, var(--border) 1px, transparent 1px);
+  background-size: 48px 48px;
+  mask-image: radial-gradient(ellipse at 30% 40%, black 0%, transparent 70%);
+  opacity: 0.5;
+  pointer-events: none;
+}
+
+/* ============================================
+   Content column + load-in sequence
+   ============================================ */
+
+.hero-content {
+  position: relative;
+  z-index: 1;
+  max-width: 640px;
+}
+
+.hero-content h1,
+.hero-content h2,
+.hero-content p,
+.hero-buttons {
+  opacity: 0;
+  transform: translateY(18px);
+  animation: rise 0.7s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+}
+
+.hero-content h1 { animation-delay: 0.05s; }
+.hero-content h2 { animation-delay: 0.2s; }
+.hero-content p  { animation-delay: 0.35s; }
+.hero-buttons    { animation-delay: 0.5s; }
+
+@keyframes rise {
+  to { opacity: 1; transform: translateY(0); }
+}
+
+.hero-content h1 {
+  margin: 0 0 0.75rem;
+  font-family: "Space Grotesk", "Inter", sans-serif;
+  font-weight: 600;
+  font-size: clamp(2.25rem, 4.5vw, 3.5rem);
+  line-height: 1.1;
+  letter-spacing: -0.02em;
+}
+
+.hero-content h1 span {
+  background: linear-gradient(100deg, var(--amber), var(--teal));
+  -webkit-background-clip: text;
+  background-clip: text;
+  color: transparent;
+}
+
+.hero-content h2 {
+  margin: 0 0 1.25rem;
+  font-family: "JetBrains Mono", monospace;
+  font-size: clamp(1rem, 1.6vw, 1.25rem);
+  font-weight: 500;
+  color: var(--teal);
+}
+
+/* typing cursor */
+.cursor {
+  display: inline-block;
+  margin-left: 2px;
+  color: var(--amber);
+  animation: blink 1s step-end infinite;
+}
+
+@keyframes blink {
+  50% { opacity: 0; }
+}
+
+.hero-content p {
+  margin: 0 0 2rem;
+  font-size: 1.05rem;
+  line-height: 1.65;
+  color: var(--text-dim);
+  max-width: 46ch;
+}
+
+/* ============================================
+   Buttons
+   ============================================ */
+
+.hero-buttons {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 1rem;
+}
+
+.btn {
+  position: relative;
+  display: inline-flex;
+  align-items: center;
+  padding: 0.85rem 1.75rem;
+  border-radius: 8px;
+  font-family: "JetBrains Mono", monospace;
+  font-size: 0.9rem;
+  font-weight: 500;
+  text-decoration: none;
+  overflow: hidden;
+  transition: transform 0.25s ease, box-shadow 0.25s ease, border-color 0.25s ease;
+}
+
+.btn.primary {
+  background: var(--amber);
+  color: var(--ink);
+}
+
+.btn.secondary {
+  border: 1px solid var(--border);
+  color: var(--text);
+}
+
+.btn:hover {
+  transform: translateY(-3px);
+}
+
+.btn.primary:hover {
+  box-shadow: 0 12px 24px -8px rgba(255, 180, 84, 0.45);
+}
+
+.btn.secondary:hover {
+  border-color: var(--teal);
+  color: var(--teal);
+}
+
+/* diagonal shine sweep on hover */
+.btn::after {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: -60%;
+  width: 40%;
+  height: 100%;
+  background: linear-gradient(120deg, transparent, rgba(255, 255, 255, 0.25), transparent);
+  transform: skewX(-20deg);
+  transition: left 0.6s ease;
+}
+
+.btn:hover::after {
+  left: 130%;
+}
+
+/* ============================================
+   Image column
+   ============================================ */
+
+.hero-image {
+  position: relative;
+  z-index: 1;
+  flex-shrink: 0;
+  width: min(360px, 32vw);
+  aspect-ratio: 1 / 1;
+  opacity: 0;
+  animation: fade-scale 0.9s cubic-bezier(0.16, 1, 0.3, 1) 0.3s forwards,
+             float 5s ease-in-out 1.2s infinite;
+}
+
+@keyframes fade-scale {
+  from { opacity: 0; transform: scale(0.92); }
+  to   { opacity: 1; transform: scale(1); }
+}
+
+@keyframes float {
+  0%, 100% { transform: translateY(0); }
+  50%      { transform: translateY(-14px); }
+}
+
+.hero-image::before {
+  content: "";
+  position: absolute;
+  inset: -14px;
+  border-radius: 50%;
+  background: conic-gradient(from 0deg, var(--amber), var(--teal), var(--amber));
+  filter: blur(2px);
+  opacity: 0.55;
+  animation: spin 8s linear infinite;
+}
+
+@keyframes spin {
+  to { transform: rotate(360deg); }
+}
+
+.hero-image img {
+  position: relative;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  border-radius: 50%;
+  border: 4px solid var(--ink);
+}
+
+/* ============================================
+   Responsive
+   ============================================ */
+
+@media (max-width: 1024px) {
+  .hero {
+    padding: 5rem 6vw;
+    gap: 2.5rem;
+  }
+}
+
+@media (max-width: 860px) {
+  .hero {
+    flex-direction: column-reverse;
+    text-align: center;
+    padding: 8rem 6vw 4rem;
+    min-height: auto;
+  }
+
+  .hero-content p {
+    margin-left: auto;
+    margin-right: auto;
+  }
+
+  .hero-buttons {
+    justify-content: center;
+  }
+
+  .hero-image {
+    width: min(240px, 55vw);
+  }
+}
+
+@media (max-width: 480px) {
+  .hero-content h1 {
+    font-size: 1.85rem;
+  }
+
+  .hero-buttons {
+    flex-direction: column;
+    width: 100%;
+  }
+
+  .btn {
+    justify-content: center;
+    width: 100%;
+  }
+}
+
+/* ============================================
+   Reduced motion
+   ============================================ */
+
+@media (prefers-reduced-motion: reduce) {
+  .hero-content h1,
+  .hero-content h2,
+  .hero-content p,
+  .hero-buttons,
+  .hero-image {
+    animation: none;
+    opacity: 1;
+    transform: none;
+  }
+
+  .cursor,
+  .hero-image::before {
+    animation: none;
+  }
+}
